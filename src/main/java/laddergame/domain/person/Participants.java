@@ -3,19 +3,17 @@ package laddergame.domain.person;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import laddergame.domain.results.Match;
-import laddergame.domain.results.MatchStrategy;
 
 public class Participants {
 
-    private final List<Person> personList;
+    private final List<Player> playerList;
 
     private Participants(String[] names) {
-        this(Arrays.stream(names).map(Person::new).collect(Collectors.toList()));
+        this(Arrays.stream(names).map(Player::new).collect(Collectors.toList()));
     }
 
-    public Participants(List<Person> personList) {
-        this.personList = personList;
+    public Participants(List<Player> playerList) {
+        this.playerList = playerList;
     }
 
     public static Participants of(String[] names) {
@@ -24,25 +22,25 @@ public class Participants {
     }
 
     public List<String> getNames() {
-        return personList.stream().map(Person::getName).collect(Collectors.toList());
+        return playerList.stream().map(Player::getName).collect(Collectors.toList());
     }
 
     public String getName(int index) {
-        return personList.get(index).getName();
+        return playerList.get(index).getName();
     }
 
     public int getPosition(final String name) {
-        return personList.stream()
+        return playerList.stream()
             .filter(p -> p.getName().equals(name))
             .findFirst()
-            .map(personList::indexOf)
+            .map(playerList::indexOf)
             .orElseThrow(() -> {
                 throw new IllegalArgumentException("찾을 수 없는 참가자입니다.");
             });
     }
 
     public int getCount() {
-        return personList.size();
+        return playerList.size();
     }
 
     private static void validateDuplication(final String[] names) {

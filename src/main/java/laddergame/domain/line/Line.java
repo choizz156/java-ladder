@@ -9,12 +9,12 @@ import laddergame.domain.person.Participants;
 
 public class Line {
 
-    private List<LineStatus> points;
+    private List<LineStatus> status;
 
     private static final int MIN_PERSON = 1;
 
     public Line(List<LineStatus> lines) {
-        this.points = lines;
+        this.status = lines;
     }
 
     public Line(int countOfPeople, ConnectionStrategy connectionStrategy) {
@@ -23,8 +23,8 @@ public class Line {
         init(connectionStrategy, initialCapacity);
     }
 
-    public List<LineStatus> getPoints() {
-        return points;
+    public List<LineStatus> getStatus() {
+        return status;
     }
 
     public static List<Line> list(
@@ -45,7 +45,7 @@ public class Line {
     }
 
     private void init(final ConnectionStrategy connectionStrategy, final int initialCapacity) {
-        this.points = connectionStrategy.getConnection(initialCapacity);
+        this.status = connectionStrategy.getConnection(initialCapacity);
     }
 
     @Override
@@ -57,18 +57,18 @@ public class Line {
             return false;
         }
         final Line line = (Line) o;
-        return Objects.equals(points, line.points);
+        return Objects.equals(status, line.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(points);
+        return Objects.hash(status);
     }
 
     @Override
     public String toString() {
         return "Line{" +
-            "points=" + points +
+            "points=" + status +
             '}';
     }
 }

@@ -12,8 +12,8 @@ import laddergame.domain.line.Connection;
 import laddergame.domain.line.Line;
 import laddergame.domain.line.LineStatus;
 import laddergame.domain.person.Participants;
-import laddergame.domain.person.Person;
-import laddergame.domain.results.Match;
+import laddergame.domain.person.Player;
+import laddergame.domain.results.RewordMatching;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,7 +27,7 @@ class LadderTest {
     void test2(int input) throws Exception {
         Line line = new Line(input, new Connection());
 
-        then(line.getPoints()).hasSize(input - 1)
+        then(line.getStatus()).hasSize(input - 1)
             .anyMatch(e -> e == LineStatus.CONNECTION || e == LineStatus.DETACHMENT);
 
     }
@@ -64,7 +64,7 @@ class LadderTest {
         //given
         List<Line> lines =
             Line.list(Depth.of(input), Participants.of(new String[]{"a", "b"}), new Connection());
-        Ladder ladder = Ladder.of(lines, new Match());
+        Ladder ladder = Ladder.of(lines, new RewordMatching());
 
         //when
 
@@ -87,7 +87,7 @@ class LadderTest {
     void test1() throws Exception {
 
         thenThrownBy(() -> {
-            new Person("abcdes");
+            new Player("abcdes");
         })
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("이름은 최대 5글자여야 합니다.");

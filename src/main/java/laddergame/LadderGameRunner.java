@@ -7,7 +7,7 @@ import laddergame.domain.ladder.LadderGame;
 import laddergame.domain.line.Connection;
 import laddergame.domain.line.Line;
 import laddergame.domain.person.Participants;
-import laddergame.domain.results.Match;
+import laddergame.domain.results.RewordMatching;
 import laddergame.domain.results.ResultMatcher;
 import laddergame.domain.results.Results;
 import laddergame.utils.CommaSplit;
@@ -27,7 +27,7 @@ public class LadderGameRunner {
 
         var count = getCount(scanner, inputView);
         var lines = Line.list(Depth.of(count), participants, new Connection());
-        var ladder = Ladder.of(lines, new Match());
+        var ladder = Ladder.of(lines, new RewordMatching());
         var ladderGame = LadderGame.create(ladder, participants);
 
         LadderView ladderView = new LadderView(ladderGame, results);

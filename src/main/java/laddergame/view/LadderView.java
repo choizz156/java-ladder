@@ -46,7 +46,7 @@ public class LadderView {
         List<Line> linePerDepth = ladderGame.getLinePerDepth();
         linePerDepth.forEach(line -> {
             sb.append(HEIGHT_LINE);
-            line.getPoints().forEach(status -> printLine(sb, status));
+            line.getStatus().forEach(status -> printLine(sb, status));
             sb.append(NEW_LINE);
         });
     }

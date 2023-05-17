@@ -3,7 +3,7 @@ package laddergame.domain.ladder;
 import java.util.Collections;
 import java.util.List;
 import laddergame.domain.line.Line;
-import laddergame.domain.results.Match;
+import laddergame.domain.results.RewordMatching;
 import laddergame.domain.results.MatchStrategy;
 
 public class Ladder {
@@ -18,7 +18,7 @@ public class Ladder {
 
     public Ladder(List<Line> lines) {
         this.lines = lines;
-        this.matchStrategy = new Match();
+        this.matchStrategy = new RewordMatching();
     }
 
     public static Ladder of(List<Line> lines, MatchStrategy matchStrategy) {
