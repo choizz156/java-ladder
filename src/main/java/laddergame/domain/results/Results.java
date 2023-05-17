@@ -1,6 +1,7 @@
 package laddergame.domain.results;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Results {
@@ -16,7 +17,7 @@ public class Results {
     }
 
     public List<String> get() {
-        return executionResults;
+        return Collections.unmodifiableList(executionResults);
     }
 
     public String get(final int result) {
