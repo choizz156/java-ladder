@@ -1,6 +1,5 @@
 package laddergame;
 
-import java.util.List;
 import java.util.Scanner;
 import laddergame.domain.ladder.Depth;
 import laddergame.domain.ladder.Ladder;
@@ -28,7 +27,7 @@ public class LadderGameRunner {
 
         var count = getCount(scanner, inputView);
         var lines = Line.list(Depth.of(count), participants, new Connection());
-        var ladder = Ladder.of(lines,new Match());
+        var ladder = Ladder.of(lines, new Match());
         var ladderGame = LadderGame.create(ladder, participants);
 
         LadderView ladderView = new LadderView(ladderGame, results);

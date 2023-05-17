@@ -3,6 +3,8 @@ package laddergame.domain.person;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import laddergame.domain.results.Match;
+import laddergame.domain.results.MatchStrategy;
 
 public class Participants {
 
@@ -16,15 +18,16 @@ public class Participants {
         this.personList = personList;
     }
 
-    public static Participants of(String[] names){
+    public static Participants of(String[] names) {
+        validateDuplication(names);
         return new Participants(names);
     }
 
-    public List<String> getNames(){
+    public List<String> getNames() {
         return personList.stream().map(Person::getName).collect(Collectors.toList());
     }
 
-    public String getName(int index){
+    public String getName(int index) {
         return personList.get(index).getName();
     }
 
@@ -40,5 +43,15 @@ public class Participants {
 
     public int getCount() {
         return personList.size();
+    }
+
+    private static void validateDuplication(final String[] names) {
+        if (isDuplication(names)) {
+            throw new IllegalStateException("참여자 이름이 중복됐습니다.");
+        }
+    }
+
+    private static boolean isDuplication(final String[] names) {
+        return Arrays.stream(names).distinct().count() != names.length;
     }
 }

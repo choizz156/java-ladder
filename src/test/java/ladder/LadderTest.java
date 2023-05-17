@@ -1,11 +1,9 @@
 package ladder;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.assertj.core.api.BDDAssertions.thenThrownBy;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 import laddergame.domain.ladder.Depth;
@@ -93,6 +91,16 @@ class LadderTest {
         })
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("이름은 최대 5글자여야 합니다.");
+    }
+
+    @DisplayName("이름이 중복될 경우 예외를 던진다.")
+    @Test
+    void test5() throws Exception {
+        assertThatThrownBy(() -> {
+            Participants.of(new String[]{"a", "a"});
+        })
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessageContaining("참여자 이름이 중복됐습니다.");
     }
 
     private boolean isEquals(final List<LineStatus> movable, final int i) {
